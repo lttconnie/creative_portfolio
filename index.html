@@ -6,6 +6,11 @@
     <title>Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+    /* CSS Parallax 視差效果 */
+    .parallax-bg {
+        /* 這行讓圖片「固定」相對於視窗滾動，產生視差 */
+        background-attachment: fixed;
+        /* 或者使用更現代的 translateZ(0) 配合 perspective */
         .tracking-widest { letter-spacing: 0.15em; }
     </style>
 </head>
@@ -24,38 +29,88 @@
             <a href="#" class="hover:text-gray-400 transition">Connect</a>
         </nav>
     </header>
+<div class="relative w-full h-screen overflow-hidden">
+    
+    <div class="absolute inset-0 w-full h-[120vh] mt-[-10vh] overflow-hidden">
+        <img src="Photo/hero-background.jpg" alt="Hero Background" class="parallax-bg w-full h-full object-cover object-center opacity-70">
+    </div>
 
-    <main class="flex-grow flex flex-col justify-center items-center text-center px-8">
-        <h1 class="text-4xl md:text-7xl font-light mb-6">
-            Design & Code for those<br>who refuse to settle.
+    <div class="relative z-10 w-full h-full flex flex-col items-center justify-center text-center">
+        <h1 class="text-6xl font-light tracking-widest leading-tight">
+            Design & Code for those<br>
+            who refuse to settle.
         </h1>
-        <p class="text-gray-500 text-lg uppercase tracking-widest">2026 — Future</p>
-    </main>
-
-    <section class="max-w-7xl mx-auto p-8 md:p-16 w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
-            <a href="project-1.html" class="group block cursor-pointer">
-                <div class="overflow-hidden bg-[#1a1a1a] aspect-[4/5] mb-6">
-                    <img src="photo/background.png" alt="Project 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-                <h3 class="text-sm uppercase tracking-[0.2em] mb-1">Project Name</h3>
-                <p class="text-xs text-gray-500 uppercase tracking-[0.1em]">Identity + Art Direction</p>
-            </a>
-
-            </div>
-    </section>
-
-    <footer class="fixed bottom-0 left-0 w-full p-6 z-50">
-    <div class="max-w-7xl mx-auto backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-6 flex justify-between items-center text-white">
-        
-        <p class="text-xs uppercase tracking-widest text-white/70">
-            © 2026 LTT. All rights reserved.
+        <p class="mt-8 text-sm uppercase tracking-[0.3em] text-white/70">
+            2026 — FUTURE
         </p>
+    </div>
+</div>
 
-        <a href="mailto:your@email.com" class="text-sm hover:text-gray-300 transition-colors uppercase tracking-widest">
-            contact@yourdomain.xyz
-        </a>
+   <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<section class="relative w-full h-screen bg-black flex items-center justify-center">
+    
+    <button onclick="scrollPrev()" class="absolute left-8 z-10 text-white/30 hover:text-white transition-all text-5xl p-4">←</button>
+    <button onclick="scrollNext()" class="absolute right-8 z-10 text-white/30 hover:text-white transition-all text-5xl p-4">→</button>
+
+    <div id="project-carousel" class="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar">
+        
+        <div class="flex-none w-full snap-center flex flex-col items-center justify-center p-8">
+            <div class="w-full max-w-5xl aspect-video rotate-2 hover:rotate-0 transition-transform duration-700 ease-out overflow-hidden border border-white/10">
+                <img src="YOUR_IMAGE_PATH_1.jpg" alt="Project 1" class="w-full h-full object-cover">
+            </div>
+            <p class="mt-8 text-lg uppercase tracking-[0.3em] text-white/80">PROJECT NAME 01</p>
+        </div>
+
+        <div class="flex-none w-full snap-center flex flex-col items-center justify-center p-8">
+            <div class="w-full max-w-5xl aspect-video -rotate-2 hover:rotate-0 transition-transform duration-700 ease-out overflow-hidden border border-white/10">
+                <img src="YOUR_IMAGE_PATH_2.jpg" alt="Project 2" class="w-full h-full object-cover">
+            </div>
+            <p class="mt-8 text-lg uppercase tracking-[0.3em] text-white/80">PROJECT NAME 02</p>
+        </div>
+
+        <div class="flex-none w-full snap-center flex flex-col items-center justify-center p-8">
+            <div class="w-full max-w-5xl aspect-video rotate-1 hover:rotate-0 transition-transform duration-700 ease-out overflow-hidden border border-white/10">
+                <img src="YOUR_IMAGE_PATH_3.jpg" alt="Project 3" class="w-full h-full object-cover">
+            </div>
+            <p class="mt-8 text-lg uppercase tracking-[0.3em] text-white/80">PROJECT NAME 03</p>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    const carousel = document.getElementById('project-carousel');
+    function scrollNext() {
+        carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+    }
+    function scrollPrev() {
+        carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+    }
+</script>
+
+<footer class="w-full mt-auto">
+    <div class="backdrop-blur-md bg-white/10 border-t border-white/20 px-12 text-white flex flex-col justify-between min-h-[500px] rounded-none">
+        
+        <div class="flex flex-col gap-4 py-12">
+         <h2 class="text-6xl font-light tracking-wide" style="font-family: 'Dancing Script', cursive;">
+        SPARK YOUR LOVE
+         </h2>
+          <a href="mailto:lttconnie@gmail.com" class="text-lg uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">
+          CONTACT | LTTCONNIE@GMAIL.COM
+         </a>
+    </div>
+
+        <div class="flex flex-col gap-4 w-full pb-12">
+            <div class="w-full border-t border-white/20"></div>
+            <p class="text-xs uppercase tracking-widest text-white/60">
+                © 2026 ALL RIGHTS RESERVED.
+            </p>
+        </div>
+        
     </div>
 </footer>
 
